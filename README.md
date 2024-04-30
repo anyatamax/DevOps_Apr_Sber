@@ -20,12 +20,20 @@ minikube start
 ./start.sh  
 В соседнем терминале запустить сервис:  
 minikube service app-service  
-
+Вывод:  
+🏃  Starting tunnel for service app-service.  
+|-----------|-------------|-------------|------------------------|  
+| NAMESPACE |    NAME     | TARGET PORT |          URL           |  
+|-----------|-------------|-------------|------------------------|  
+| default   | app-service |             | http://127.0.0.1:50765 |  
+|-----------|-------------|-------------|------------------------|  
+🎉  Opening service default/app-service in default browser...  
+❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.   
 
 Для получения времени необходимо выполнить:  
-curl http://127.0.0.1:50765/time  (url из картинки выше)   
+curl http://127.0.0.1:50765/time  (url из кода выше)   
 Для получения статистики необходимо выполнить:  
-curl http://127.0.0.1:50765/statistics  (url из картинки выше)   
+curl http://127.0.0.1:50765/statistics  (url из кода выше)   
 Для получения файла statistics.txt необходимо выполнить:  
 kubectl cp statistics-client-56c46664bf-r64rl:statistics.txt ./statistics.txt (название пода statistics-client можно взять из команды kubectl get pods -o wide)  
 
