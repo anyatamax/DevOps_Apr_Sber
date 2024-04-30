@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: statistics-client
+  labels:
+    app: statistics-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: statistics-client
+  template:
+    metadata:
+      labels:
+        app: statistics-client
+    spec:
+      containers:
+      - name: statistics-client
+        image: anyamax/requests_time:v0.1
+        ports:
+        # - containerPort: 5000
+        #   protocol: TCP
+        #   name: http
+        resources:
+          limits:
+            cpu: 50m
+            memory: 50Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
