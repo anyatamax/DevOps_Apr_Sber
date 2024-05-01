@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app-deployment
-        image: anyamax/time_app:v0.1
+        image: anyamax/time_app:v0.3
         ports:
         - containerPort: 5000
           protocol: TCP
