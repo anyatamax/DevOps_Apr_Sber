@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-exporter
+  template:
+    metadata:
+      labels:
+        app: app-exporter
+    spec:
+      containers:
+      - name: app-exporter
+        image: anyamax/metrics_exporter:v0.3
+        ports:
+        - containerPort: 8000
