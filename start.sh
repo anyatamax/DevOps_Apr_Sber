@@ -7,13 +7,18 @@ istioctl install -y --set profile=demo --set meshConfig.outboundTrafficPolicy.mo
 kubectl label namespace default istio-injection=enabled
 
 git clone https://github.com/prometheus-operator/kube-prometheus.git
+
+docker build -t time_app:v0.3 time_app/ -f ./time_app/Dockerfile.app
+docker build -t requests_time:v0.3 time_app/ -f ./time_app/Dockerfile.client
+docker build -t metrics_exporter:v0.3 time_app/ -f ./time_app/Dockerfile.metrics
+
 kubectl apply --server-side -f kube-prometheus/manifests/setup
 kubectl apply -f kube-prometheus/manifests/
 
 kubectl create -f time_app/deploy/app-service.yaml
 
 kubectl create -f time_app/deploy/app-deployment.yaml 
-kubectl create -f time_app/deploy/client-deployment.yaml
+kubectl create -f time_app/deploy/cronjob.yaml
 kubectl create -f time_app/deploy/metrics-deployment.yaml
 
 kubectl create -f time_app/deploy/gateway.yaml

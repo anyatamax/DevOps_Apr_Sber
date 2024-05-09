@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: statistics-client
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: statistics-client
+            image: anyamax/requests_time:v0.3
+            volumeMounts:
+            - name: data-volume
+              mountPath: "/time_app/data"
+          restartPolicy: OnFailure
+          volumes:
+          - name: data-volume
+            hostPath:
+              path: /data
+              type: DirectoryOrCreate
